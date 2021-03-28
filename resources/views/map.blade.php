@@ -1,6 +1,6 @@
 @if (!empty($latitude) && !empty($longitude))
     <div id="osm-map"></div>
-xxx
+
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet"/>
 

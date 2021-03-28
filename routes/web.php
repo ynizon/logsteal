@@ -20,10 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/log/{code}', 'Controller@log');
+Route::get('/ping/{code}', 'Controller@ping');
 Route::get('/renew/{user_id}', 'Controller@renew');
 Route::get('/cron', 'Controller@cron');
+Auth::routes(['register' => env('REGISTER')]);
 
-Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('computer', 'ComputerController');
 });

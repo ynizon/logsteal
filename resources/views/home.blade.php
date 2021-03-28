@@ -19,7 +19,7 @@
 					<ul>
 						@foreach (Auth::user()->computers as $computer)
 							<li>
-                                <a href="/computer/{{$computer->id}}/edit" class="pointer" title="Remove">
+                                <a href="/computer/{{$computer->id}}/edit" class="pointer" title="Edit">
                                    {{$computer->name}}
                                 </a>
                                 -

@@ -86,13 +86,7 @@
 
                 <div class="">
                     <p>
-                        Logger is a tool for checking informations about an ip address.<br/>
-                        You add on your device (computer , phone...) a call to this website, then<br/>
-                        you will get an email each month with the detail of the connections.<br/>
-                        <br/>
-                        If your device is stolen, you can go to the police with a list of informations<br/>
-                        like the ip address, the hostname...<br/>
-                        You can also track informations on Google Analytics.
+
                     </p>
                 </div>
             </div>

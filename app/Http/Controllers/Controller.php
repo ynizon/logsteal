@@ -58,20 +58,19 @@ class Controller extends BaseController
         }
     }
 
-	public function log($code){
+    private function connection($code, $show){
+        $computer = Computer::where("code","=",$code)->first();
+        if ($computer){
+            $user = $computer->user();
 
-		$computer = Computer::where("code","=",$code)->first();
-		if ($computer){
-			$user = $computer->user();
+            $ip = $this->get_client_ip();
+            $info = [];
+            $info['ip'] = $ip;
+            $info['hostname'] = gethostbyaddr($ip);
 
-			$ip = $this->get_client_ip();
-			$info = [];
-			$info['ip'] = $ip;
-			$info['hostname'] = gethostbyaddr($ip);
-
-			$db = storage_path().'/GeoipDB/GeoLite2-City.mmdb';
-			if (file_exists($db)) {
-			    try {
+            $db = storage_path().'/GeoipDB/GeoLite2-City.mmdb';
+            if (file_exists($db)) {
+                try {
                     $reader = new Reader($db);
                     $record = $reader->city($ip);
 
@@ -84,14 +83,14 @@ class Controller extends BaseController
                     $info['longitude'] = $record->location->longitude; // -93.2323
                     $info['network'] = $record->traits->network; // '128.101.101.101/32'
                 }catch(\Exception $e){
-			        //No informations about this IP
+                    //No informations about this IP
                 }
             }
 
-			$connection = new Connection();
-			$connection->computer_id = $computer->id;
-			$connection->info = json_encode($info);
-			$connection->save();
+            $connection = new Connection();
+            $connection->computer_id = $computer->id;
+            $connection->info = json_encode($info);
+            $connection->save();
 
             $connections = $computer->connections()->paginate(20)->withQueryString();
             $latitude = '';
@@ -107,8 +106,21 @@ class Controller extends BaseController
                 }
             }
 
-			return view('log', compact('computer','connections', 'longitude','latitude'));
-		}
+            if ($show){
+                return view('log', compact('computer','connections', 'longitude','latitude'));
+            }else{
+                header("location: https://www.google.com");
+                exit();
+            }
+        }
+    }
+
+    public function ping($code){
+        return $this->connection($code, false);
+    }
+
+	public function log($code){
+        return $this->connection($code, true);
 	}
 
 	// Function to get the client IP address
