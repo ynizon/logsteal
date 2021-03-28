@@ -39,3 +39,9 @@ with Tasker (Android): https://play.google.com/store/apps/details?id=net.dinglis
 
 On my windows computer, i have also added a batch file with 
 wget : http://gnuwin32.sourceforge.net/packages/wget.htm
+
+# Maxmind (GEOIP2)
+
+For having details about the city of the connection, you need to have the maxmind database.
+To download it, you need an account on https://www.maxmind.com/en/geoip2-databases
+The, copy the database into storage/GeoipDB/GeoLite2-City.mmdb
