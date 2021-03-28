@@ -28,7 +28,7 @@ https://yourwebsite.com/log/123456
 When you access to this url, the website will show all details 
 informations about the connection and keep them into the database.
 You can now access like this:
-<img src='public/Screenshot_1.jpg'/>
+<img src='./public/Screenshot_1.jpg'/>
 
 You can also set this url https://yourwebsite.com/ping/123456
 This url is the same than the other, but redirect to google without
