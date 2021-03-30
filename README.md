@@ -32,9 +32,10 @@ You can now access like this:
 
 You can also set this url https://yourwebsite.com/share/123456
 This url is the same than the other, but redirect to google without
-showing any informations.
+showing any informations. If you are victim of phishing, you can give this to the pirate...
+With this last url, you will notify instantly with an email.
 
-Personaly, i have added on my phone startup a HTTP request to the url
+Personally, i have added on my phone startup a HTTP request to the url
 with Tasker (Android): https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm&hl=fr&gl=US
 
 On my windows computer, i have also added a batch file with 

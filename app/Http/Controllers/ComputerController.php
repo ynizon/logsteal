@@ -31,7 +31,9 @@ class ComputerController extends Controller
 		$computer->id = 0;
 		$computer->name = '';
         $connections = $computer->connections()->paginate(20)->withQueryString();
-		return view('computers/edit', compact('computer','connections'));
+        $latitude = '';
+        $longitude = '';
+		return view('computers/edit', compact('computer','connections','latitude','longitude'));
     }
 
     /**
@@ -43,7 +45,6 @@ class ComputerController extends Controller
     public function store(Request $request)
     {
         $computer = new Computer();
-		echo "xx";exit();
     }
 
     /**
@@ -110,7 +111,7 @@ class ComputerController extends Controller
 				$computer->name = $request->input('name');
 				$computer->save();
 			}
-			return redirect('/home')->withStatus('You need to add this call: '.$computer->genUrl() . ' at startup on your device.');
+			return redirect('/home')->withStatus('You need to add this call: '.$computer->genUrl() . ' or '.$computer->genUrl('share').' at startup on your device.');
         } catch (\Exception $e) {
             return redirect("/home")->withError($e->getMessage());
         }

@@ -12,16 +12,11 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+               color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
             }
 
             .flex-center {
@@ -74,10 +69,11 @@
                     Informations
                 </div>
 
-                <div style="display:inline-block;">
+                <div style="padding:50px;" class="row">
                     <div class="col-md-6">
                         @include('map', [$latitude, $longitude])
-
+                    </div>
+                    <div class="col-md-6">
                         <ul style="width:300px">
                         @foreach($connections as $connection)
                             <li>
@@ -93,9 +89,11 @@
                         </ul>
                     </div>
 
+                    <div class="col-md-12">
                     {{ $connections->links() }}
-
-				    <img src="http://nojsstats.appspot.com/{{env('GA_UA')}}/{{env('URL_WEBSITE')}}" />
+                        <br/>
+				        <img src="http://nojsstats.appspot.com/{{env('GA_UA')}}/{{env('URL_WEBSITE')}}" />
+                    </div>
                 </div>
             </div>
         </div>

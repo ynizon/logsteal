@@ -25,17 +25,22 @@ class Controller extends BaseController
                 }
             }
             if (count($user->computers)>0){
-                $info = '<a href="/renew/'.$user->id.'">For renewing your computers, click on this link.</a>';
-                foreach ($user->computers as $computer){
-                    $info = $computer->log();
+                $content = '<a href="/renew/'.$user->id.'">For renewing your computers, click on this link.</a><br/>';
+                foreach ($user->computers as $computer) {
+                    foreach ($computer->connections() as $connection) {
+                        $info = json_decode($connection->info,true);
+                        foreach ($info as $k => $v) {
+                            $content .= $k . ' : ' . $v . '<br/>';
+                        }
+                        $content .= '<hr/>';
+                    }
                 }
-                $info .= '<hr/>';
 
                 try {
                     $subject = 'Logger > Schedule';
-                    Mail::send('emails.message', ['content' => $info], function ($m) use ($user, $subject) {
-                        $m->from($user->getEmail(), $user->getName());
-                        $m->to($user->getEmail(), $user->getName())->subject($subject);
+                    Mail::send('emails.message', ['content' => $content], function ($m) use ($user, $subject) {
+                        $m->from($user->email, $user->name);
+                        $m->to($user->email, $user->name)->subject($subject);
                     });
                 }catch (\Exception $e){
 
@@ -61,7 +66,7 @@ class Controller extends BaseController
     private function connection($code, $show){
         $computer = Computer::where("code","=",$code)->first();
         if ($computer){
-            $user = $computer->user();
+            $user = $computer->user;
 
             $ip = $this->get_client_ip();
             $info = [];
@@ -124,6 +129,22 @@ class Controller extends BaseController
             if ($show){
                 return view('log', compact('computer','connections', 'longitude','latitude'));
             }else{
+                //Notif par email
+                try {
+                    $subject = 'Logger > Warning';
+                    $content = '';
+                    foreach ($info as $k=>$v){
+                        $content .= $k.' : '.$v.'<br/>';
+                    }
+
+                    Mail::send('emails.message', ['content' => $content], function ($m) use ($user, $subject) {
+                        $m->from($user->email, $user->name);
+                        $m->to($user->email, $user->name)->subject($subject);
+                    });
+                }catch (\Exception $e){
+                    //Nothing
+                }
+
                 header("location: https://www.google.com");
                 exit();
             }

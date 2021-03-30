@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Computers') }}</div>
+                <div class="card-header">{{ __('Devices') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -26,7 +26,7 @@
                                 <a target="_blank" href="{{$computer->genUrl()}}">{{$computer->genUrl()}}</a>
                                 &nbsp;&nbsp;&nbsp;
                                 {!! Form::open(['method' => 'DELETE', "style"=>"display:inline",'route' => ['computer.destroy', $computer->id]]) !!}
-									<a href="#" class="pointer" title="Remove" onclick="if (confirm('Confirm remove this computer ?')){$(this).parent().submit();}"><i class="fa fa-trash"></i></a>
+									<a href="#" class="pointer" title="Remove" onclick="if (confirm('Confirm remove this device ?')){$(this).parent().submit();}"><i class="fa fa-trash"></i></a>
 								{!! Form::close() !!}
 							</li>
 						@endforeach

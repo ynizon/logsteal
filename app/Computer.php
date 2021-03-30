@@ -14,11 +14,11 @@ class Computer extends Model
 
 	public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function genUrl(){
-        return env('APP_URL').'/log/'.$this->code;
+    public function genUrl($dir = 'log'){
+        return env('APP_URL').'/'.$dir.'/'.$this->code;
     }
 
     public function genCode($len=8) {
