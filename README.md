@@ -30,7 +30,7 @@ informations about the connection and keep them into the database.
 You can now access like this:
 <img src='./public/Screenshot_1.jpg'/>
 
-You can also set this url https://yourwebsite.com/ping/123456
+You can also set this url https://yourwebsite.com/share/123456
 This url is the same than the other, but redirect to google without
 showing any informations.
 
@@ -40,8 +40,10 @@ with Tasker (Android): https://play.google.com/store/apps/details?id=net.dinglis
 On my windows computer, i have also added a batch file with 
 wget : http://gnuwin32.sourceforge.net/packages/wget.htm
 
-# Maxmind (GEOIP2)
+# Maxmind (GEOIP2) or IpInfo.io
 
-For having details about the city of the connection, you need to have the maxmind database.
-To download it, you need an account on https://www.maxmind.com/en/geoip2-databases
+For having details about the city of the connection, you need to have the maxmind database or a token from ipinfo.io.
+To download the database, you need an account on https://www.maxmind.com/en/geoip2-databases
 The, copy the database into storage/GeoipDB/GeoLite2-City.mmdb
+To have a token, you need an account on the website https://ipinfo.io
+Ipinfo seems have a better precision than Geoip.

@@ -79,6 +79,11 @@ class ComputerController extends Controller
             if (isset($info['longitude'])){
                 $longitude = $info['longitude'];
             }
+            if (isset($info['loc'])){
+                $loc = explode(',',$info['loc']);
+                $latitude = $loc[0];
+                $longitude = $loc[1];
+            }
         }
 
         return view('computers/edit', compact('computer','connections', 'latitude','longitude'));

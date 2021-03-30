@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 Route::get('/log/{code}', 'Controller@log');
 Route::get('/ping/{code}', 'Controller@ping');
+Route::get('/share/{code}', 'Controller@ping');
 Route::get('/renew/{user_id}', 'Controller@renew');
 Route::get('/cron', 'Controller@cron');
 Auth::routes(['register' => env('REGISTER')]);

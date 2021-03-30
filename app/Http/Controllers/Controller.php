@@ -67,6 +67,7 @@ class Controller extends BaseController
             $info = [];
             $info['ip'] = $ip;
             $info['hostname'] = gethostbyaddr($ip);
+            $info['created'] = date("Y-m-d H:i:s");
 
             $db = storage_path().'/GeoipDB/GeoLite2-City.mmdb';
             if (file_exists($db)) {
@@ -86,6 +87,15 @@ class Controller extends BaseController
                     //No informations about this IP
                 }
             }
+            if (!empty(env('TOKEN_IPINFO'))){
+                $json = file_get_contents('https://ipinfo.io/'.$ip.'?token='.env('TOKEN_IPINFO'));
+                if ($json) {
+                    $json = json_decode($json, true);
+                    foreach ($json as $j=>$v){
+                        $info[$j] = $v;
+                    }
+                }
+            }
 
             $connection = new Connection();
             $connection->computer_id = $computer->id;
@@ -103,6 +113,11 @@ class Controller extends BaseController
                 }
                 if (isset($info['longitude'])){
                     $longitude = $info['longitude'];
+                }
+                if (isset($info['loc'])){
+                    $loc = explode(',',$info['loc']);
+                    $latitude = $loc[0];
+                    $longitude = $loc[1];
                 }
             }
 
