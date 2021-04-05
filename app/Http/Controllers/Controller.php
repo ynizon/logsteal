@@ -39,7 +39,7 @@ class Controller extends BaseController
                 try {
                     $subject = 'Logger > Schedule';
                     Mail::send('emails.message', ['content' => $content], function ($m) use ($user, $subject) {
-                        $m->from($user->email, $user->name);
+                        $m->from(env('MAIL_FROM_ADDRESS'), $user->name);
                         $m->to($user->email, $user->name)->subject($subject);
                     });
                 }catch (\Exception $e){
@@ -138,7 +138,7 @@ class Controller extends BaseController
                     }
 
                     Mail::send('emails.message', ['content' => $content], function ($m) use ($user, $subject) {
-                        $m->from($user->email, $user->name);
+                        $m->from(env('MAIL_FROM_ADDRESS'), $user->name);
                         $m->to($user->email, $user->name)->subject($subject);
                     });
                 }catch (\Exception $e){

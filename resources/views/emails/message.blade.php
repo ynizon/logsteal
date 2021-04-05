@@ -1,3 +1,7 @@
-<p>
-	{!! $content !!}
-</p>
+<html>
+    <body>
+        <p>
+            {!! $content !!}
+        </p>
+</body>
+</html>
