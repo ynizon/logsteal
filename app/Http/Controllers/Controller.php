@@ -63,7 +63,7 @@ class Controller extends BaseController
         }
     }
 
-    private function connection($code, $show){
+    private function connection($code, $show, $download){
         $computer = Computer::where("code","=",$code)->first();
         if ($computer){
             $user = $computer->user;
@@ -73,7 +73,7 @@ class Controller extends BaseController
             $info['ip'] = $ip;
             $info['hostname'] = gethostbyaddr($ip);
             $info['created'] = date("Y-m-d H:i:s");
-
+            $info['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
             $db = storage_path().'/GeoipDB/GeoLite2-City.mmdb';
             if (file_exists($db)) {
                 try {
@@ -145,19 +145,27 @@ class Controller extends BaseController
                     //Nothing
                 }
 
-                header("location: https://www.google.com");
+                if ($download){
+                    return view('download');
+                }else {
+                    header("location: https://www.google.com");
+                }
                 exit();
             }
         }
     }
 
     public function ping($code){
-        return $this->connection($code, false);
+        return $this->connection($code, false, false);
     }
 
 	public function log($code){
-        return $this->connection($code, true);
+        return $this->connection($code, true, false);
 	}
+
+    public function download($code){
+        return $this->connection($code, false, true);
+    }
 
 	// Function to get the client IP address
 	private function get_client_ip() {

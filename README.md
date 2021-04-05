@@ -35,6 +35,10 @@ This url is the same than the other, but redirect to google without
 showing any informations. If you are victim of phishing, you can give this to the pirate...
 With this last url, you will notify instantly with an email.
 
+You can also try this url https://yourwebsite.com/download/123456
+It 's the same than share, but it give you a fake link for download without any redirection.
+The pirate will get a zip file corrupted...
+
 Personally, i have added on my phone startup a HTTP request to the url
 with Tasker (Android): https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm&hl=fr&gl=US
 
